@@ -1,0 +1,83 @@
+import React from 'react';
+import {
+  MDBFooter,
+  MDBContainer,
+  MDBIcon
+} from 'mdb-react-ui-kit';
+
+import './Footer.css'; // Assuming you have custom styles for Footer
+
+export default function Footer() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission logic here
+    const formData = new FormData(event.target);
+    const name = formData.get('Name');
+    const email = formData.get('Email');
+    const message = formData.get('Message');
+    console.log(`Name: ${name}, Email: ${email}, Message: ${message}`);
+    event.target.reset(); // Reset the form after submission
+  };
+
+  return (
+    <div className="app-container">
+      <MDBFooter className='text-center' color='white' bgColor='dark'>
+        <MDBContainer className='p-4'>
+          {/* Social Icons Section */}
+          <section className='mb-4'>
+            <MDBIcon fab icon='facebook-f' className='m-1' />
+            <MDBIcon fab icon='twitter' className='m-1' />
+            <MDBIcon fab icon='google' className='m-1' />
+            <MDBIcon fab icon='instagram' className='m-1' />
+            <MDBIcon fab icon='linkedin-in' className='m-1' />
+            <MDBIcon fab icon='github' className='m-1' />
+          </section>
+
+          {/* Welcome Message Section */}
+          <section className='mb-4'>
+            <p>
+              Hello There! Welcome to our PC Builder and Guideline Project. Feel free to explore our proposed PC building guide or customize your PC for approximate prices.
+            </p>
+          </section>
+
+          {/* Contact Me Section */}
+          <section id="contact">
+            <div className="Contact_f">
+              <div className="Contact_container">
+                <div className="row">
+                  <div className="contact-left">
+                    <h1 className="hobbies-sub-title">Contact Me</h1>
+                    <p><i className="fas fa-paper-plane"></i> nasif.ahmed95@gmail.com</p>
+                    <p><i className="fas fa-phone-volume"></i> 01757458800</p>
+                    <div className="social-icons">
+                      <a href="https://www.bracu.ac.bd/"><img src="assets/bu.png" className='icon' alt="BU" /></a>
+                      <a href="https://www.facebook.com/nasifahmednongor/"><img src="assets/fb.png" className='icon' alt="Facebook" /></a>
+                    </div>
+                  </div>
+                  <div className="contact-right">
+                    <form name="submit-to-google-sheet" onSubmit={handleSubmit}>
+                      <input type="text" name="Name" placeholder="Your Name" required />
+                      <input type="email" name="Email" placeholder="Your Email" required />
+                      <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
+                      <button type="submit" className="btn btn-color-1">Submit</button>
+                    </form>
+                    {/* Optionally display a message after form submission */}
+                    <span id="msg">Hello</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </MDBContainer>
+
+        {/* Footer Text Section */}
+        <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+          © 2024 Copyright:
+          <a className='text-white' href=''>
+            Nasif Ahmed Nafi
+          </a>
+        </div>
+      </MDBFooter>
+    </div>
+  );
+}

@@ -1,0 +1,56 @@
+AdminPanel.css
+
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+ 
+  }
+  
+  .admin-panel h2 {
+
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #dad3d3;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #564f4f4f;
+  }
+  
+  .admin-panel nav {
+    
+    display: flex;
+    justify-content:space-between;
+    /* flex-wrap: wrap; */
+    max-width: auto;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #807979;
+    border-radius: 5px;
+    background-color: #464444;
+  }
+  
+  .admin-panel .nav-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    text-decoration: none;
+    color: #333;
+    background-color: #f4f4f4;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+    
+  }
+  
+  .admin-panel .nav-link:hover,
+  .admin-panel .nav-link.active {
+    background-color: #e0e0e0;
+  }
+  
+  .admin-panel .nav-link.active {
+    font-weight: bold;
+  }

@@ -1,0 +1,105 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const CPUManagement = () => {
+    
+    const [cpus, setCPUs] = useState([]);
+    const [newCPU, setNewCPU] = useState({
+        name: '',
+        wattage: 0,
+        cost: 0,
+        brand: '',
+        imageLink: '',
+    });
+
+    const [editingCPU, setEditingCPU] = useState(null);
+
+    useEffect(() => {
+        fetchCPUs();
+    }, []);
+
+    const fetchCPUs = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/v1/cpu');
+            setCPUs(response.data);
+        } catch (error) {
+            console.error('Error fetching CPUs:', error);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewCPU((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const addCPU = async () => {
+        try {
+            await axios.post('http://localhost:8080/api/v1/cpu', newCPU);
+            setNewCPU({
+                name: '',
+                wattage: 0,
+                cost: 0,
+                brand: '',
+                imageLink: '',
+            });
+            fetchCPUs();
+        } catch (error) {
+            console.error('Error adding CPU:', error);
+        }
+    };
+
+    return (
+        <div>
+            <h2>CPU Management</h2>
+            <ul>
+                {cpus.map((cpu) => (
+                    <li key={cpu.id}>
+                        {cpu.name} - {cpu.brand}
+                    </li>
+                ))}
+            </ul>
+            <h3>Add New CPU</h3>
+            <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={newCPU.name}
+                onChange={handleInputChange}
+            />
+            <input
+                type="number"
+                name="wattage"
+                placeholder="Wattage"
+                value={newCPU.wattage}
+                onChange={handleInputChange}
+            />
+            <input
+                type="number"
+                name="cost"
+                placeholder="Cost"
+                value={newCPU.cost}
+                onChange={handleInputChange}
+            />
+            <input
+                type="text"
+                name="brand"
+                placeholder="Brand"
+                value={newCPU.brand}
+                onChange={handleInputChange}
+            />
+            <input
+                type="text"
+                name="imageLink"
+                placeholder="Image Link"
+                value={newCPU.imageLink}
+                onChange={handleInputChange}
+            />
+            <button onClick={addCPU}>Add CPU</button>
+        </div>
+    );
+};
+
+export default CPUManagement;

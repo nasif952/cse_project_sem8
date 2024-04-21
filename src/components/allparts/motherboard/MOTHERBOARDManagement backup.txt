@@ -1,0 +1,116 @@
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const MOTHERBOARDManagement = () => {
+//     const [motherboards, setMotherboards] = useState([]);
+//     const [newMotherboardName, setNewMotherboardName] = useState('');
+//     const [newMotherboardBrand, setNewMotherboardBrand] = useState('');
+//     const [newMotherboardWattage, setNewMotherboardWattage] = useState(0);
+//     const [newMotherboardCost, setNewMotherboardCost] = useState(0);
+//     const [newMotherboardPlatform, setNewMotherboardPlatform] = useState('');
+//     const [newMotherboardImageLink, setNewMotherboardImageLink] = useState('');
+//     const [loading, setLoading] = useState(true);
+
+//     useEffect(() => {
+//         fetchMotherboards();
+//     }, []);
+
+//     const fetchMotherboards = () => {
+//         axios.get('http://localhost:8080/api/v1/motherboard')
+//             .then(response => {
+//                 setMotherboards(response.data);
+//                 setLoading(false);
+//             })
+//             .catch(error => {
+//                 console.error('Error fetching Motherboards:', error);
+//                 setLoading(false);
+//             });
+//     };
+
+//     const addMotherboard = () => {
+//         axios.post('http://localhost:8080/api/v1/motherboard', {
+//             name: newMotherboardName,
+//             brand: newMotherboardBrand,
+//             wattage: newMotherboardWattage,
+//             cost: newMotherboardCost,
+//             platform: newMotherboardPlatform,
+//             imageLink: newMotherboardImageLink
+//             // Add other properties as needed
+//         })
+//         .then(response => {
+//             // Clear input fields and fetch updated list of motherboards
+//             setNewMotherboardName('');
+//             setNewMotherboardBrand('');
+//             setNewMotherboardWattage(0);
+//             setNewMotherboardCost(0);
+//             setNewMotherboardPlatform('');
+//             setNewMotherboardImageLink('');
+//             fetchMotherboards();
+//         })
+//         .catch(error => {
+//             console.error('Error adding Motherboard:', error);
+//         });
+//     };
+
+//     if (loading) {
+//         return <p>Loading...</p>;
+//     }
+
+//     return (
+//         <div>
+//             <h2>Motherboards</h2>
+//             <ul>
+//                 {motherboards.map(motherboard => (
+//                     <li key={motherboard.id}>
+//                         {motherboard.name} - {motherboard.brand}
+//                     </li>
+//                 ))}
+//             </ul>
+            
+//             <h3>Add New Motherboard</h3>
+//             <div>
+//                 <input
+//                     type="text"
+//                     placeholder="Name"
+//                     value={newMotherboardName}
+//                     onChange={e => setNewMotherboardName(e.target.value)}
+//                 />
+//                 <input
+//                     type="text"
+//                     placeholder="Brand"
+//                     value={newMotherboardBrand}
+//                     onChange={e => setNewMotherboardBrand(e.target.value)}
+//                 />
+//                 <input
+//                     type="number"
+//                     placeholder="Wattage"
+//                     value={newMotherboardWattage}
+//                     onChange={e => setNewMotherboardWattage(parseInt(e.target.value))}
+//                 />
+//                 <input
+//                     type="number"
+//                     placeholder="Cost"
+//                     value={newMotherboardCost}
+//                     onChange={e => setNewMotherboardCost(parseInt(e.target.value))}
+//                 />
+//                 <input
+//                     type="text"
+//                     placeholder="Platform"
+//                     value={newMotherboardPlatform}
+//                     onChange={e => setNewMotherboardPlatform(e.target.value)}
+//                 />
+//                 <input
+//                     type="text"
+//                     placeholder="Image Link"
+//                     value={newMotherboardImageLink}
+//                     onChange={e => setNewMotherboardImageLink(e.target.value)}
+//                 />
+//                 <button onClick={addMotherboard}>Add Motherboard</button>
+//             </div>
+            
+//             {/* Additional UI for editing or deleting Motherboards */}
+//         </div>
+//     );
+// };
+
+// export default MOTHERBOARDManagement;

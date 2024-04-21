@@ -1,0 +1,14 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height:auto; /* Ensure the container takes up at least the full viewport height */
+  }
+  
+  .content {
+    flex: 1; /* Make the content area grow to fill remaining space */
+    padding-bottom: 1px; /* Reserve space at the bottom for the sticky footer */
+  }
+  
+  .links{
+    align-items: center;
+  }

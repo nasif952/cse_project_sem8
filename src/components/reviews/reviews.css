@@ -1,0 +1,9 @@
+.mt-3 {
+    color: rgb(23, 20, 20);
+    display: flex;
+    align-items: center;
+}
+
+.mt-3 h3 {
+    color: white; /* Set text color of h3 to white */
+}

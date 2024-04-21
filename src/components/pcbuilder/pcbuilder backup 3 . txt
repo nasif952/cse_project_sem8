@@ -1,0 +1,182 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './PCBuilder.css';
+
+const PCBuilder = () => {
+    const [components, setComponents] = useState({
+        CPUs: [],
+        RAMs: [],
+        GPUs: [],
+        Motherboards: [],
+        Storages: [],
+        PowerSupplies: [],
+        Monitors: []
+
+    });
+
+    const [selectedComponent, setSelectedComponent] = useState({
+        type: '',
+        name: '',
+        wattage: '',
+        cost: ''
+    });
+
+    useEffect(() => {
+        const fetchComponents = async () => {
+            try {
+                const endpoints = [
+                    '/api/v1/powersupply',
+                    '/api/v1/cpu',
+                    '/api/v1/graphicscard',
+                    '/api/v1/monitor',
+                    '/api/v1/motherboard',
+                    '/api/v1/ram',
+                    '/api/v1/storage'
+                ];
+
+                const promises = endpoints.map(endpoint => axios.get(`http://localhost:8080${endpoint}`));
+                const responses = await Promise.all(promises);
+
+                const data = responses.map(response => response.data);
+
+                setComponents({
+                    CPUs: data[1], // Index 1 corresponds to CPU data
+                    RAMs: data[5], // Index 5 corresponds to RAM data
+                    GPUs: data[2], // Index 2 corresponds to GPU data
+                    Motherboards: data[4], // Index 4 corresponds to Motherboard data
+                    Storages: data[6],
+                    PowerSupplies: data[0],
+                    Monitors: data[3]
+                    
+                });
+            } catch (error) {
+                console.error('Error fetching components:', error);
+            }
+        };
+
+        fetchComponents();
+    }, []);
+
+    const handleComponentSelect = (type, name) => {
+        const selected = components[type].find(component => component.name === name);
+        setSelectedComponent({
+            type: type,
+            name: selected.name,
+            wattage: selected.wattage,
+            cost: selected.cost
+        });
+    };
+
+    return (
+        <div className="pcbcontainer">
+            <h2>Build Your PC</h2>
+            <div className="cpu-section">
+                <h3>CPU</h3>
+                <select onChange={(e) => handleComponentSelect('CPUs', e.target.value)}>
+                    <option value="">Select CPU</option>
+                    {components.CPUs.map(cpu => (
+                        <option key={cpu.id} value={cpu.name}>{cpu.name}</option>
+                    ))}
+                </select>
+                {selectedComponent.type === 'CPUs' && (
+                    <div>
+                        <p>Wattage: {selectedComponent.wattage}</p>
+                        <p>Cost: {selectedComponent.cost}</p>
+                    </div>
+                )}
+            </div>
+            <div className="ram-section">
+                <h3>RAM</h3>
+                <select onChange={(e) => handleComponentSelect('RAMs', e.target.value)}>
+                    <option value="">Select RAM</option>
+                    {components.RAMs.map(ram => (
+                        <option key={ram.id} value={ram.name}>{ram.name}</option>
+                    ))}
+                </select>
+                {selectedComponent.type === 'RAMs' && (
+                    <div>
+                        <p>Wattage: {selectedComponent.wattage}</p>
+                        <p>Cost: {selectedComponent.cost}</p>
+                    </div>
+                )}
+            </div>
+            <div className="gpu-section">
+                <h3>GPU</h3>
+                <select onChange={(e) => handleComponentSelect('GPUs', e.target.value)}>
+                    <option value="">Select GPU</option>
+                    {components.GPUs.map(gpu => (
+                        <option key={gpu.id} value={gpu.name}>{gpu.name}</option>
+                    ))}
+                </select>
+                {selectedComponent.type === 'GPUs' && (
+                    <div>
+                        <p>Wattage: {selectedComponent.wattage}</p>
+                        <p>Cost: {selectedComponent.cost}</p>
+                    </div>
+                )}
+            </div>
+            <div className="storage-section">
+                <h3>Storage</h3>
+                <select onChange={(e) => handleComponentSelect('Storages', e.target.value)}>
+                    <option value="">Select Storage</option>
+                    {components.Storages.map(storage => (
+                        <option key={storage.id} value={storage.name}>{storage.name}</option>
+                    ))}
+                </select>
+                {selectedComponent.type === 'Storages' && (
+                    <div>
+                        <p>Wattage: {selectedComponent.wattage}</p>
+                        <p>Cost: {selectedComponent.cost}</p>
+                    </div>
+                )}
+            </div>
+            <div className="psu-section">
+                <h3>Power Supply</h3>
+                <select onChange={(e) => handleComponentSelect('PowerSupplies', e.target.value)}>
+                    <option value="">Select Power Supply</option>
+                    {components.PowerSupplies.map(psu => (
+                        <option key={psu.id} value={psu.name}>{psu.name}</option>
+                    ))}
+                </select>
+                {selectedComponent.type === 'PowerSupplies' && (
+                    <div>
+                        <p>Wattage: {selectedComponent.wattage}</p>
+                        <p>Cost: {selectedComponent.cost}</p>
+                    </div>
+                )}
+            </div>
+            <div className="monitor-section">
+                <h3>Monitor</h3>
+                <select onChange={(e) => handleComponentSelect('Monitors', e.target.value)}>
+                    <option value="">Select Monitor</option>
+                    {components.Monitors.map(monitor => (
+                        <option key={monitor.id} value={monitor.name}>{monitor.name}</option>
+                    ))}
+                </select>
+                {selectedComponent.type === 'Monitors' && (
+                    <div>
+                        <p>Wattage: {selectedComponent.wattage}</p>
+                        <p>Cost: {selectedComponent.cost}</p>
+                    </div>
+                )}
+            </div>
+            <div className="mobo-section">
+                <h3>Motherboard</h3>
+                <select onChange={(e) => handleComponentSelect('Motherboards', e.target.value)}>
+                    <option value="">Select Motherboard</option>
+                    {components.Motherboards.map(mobo => (
+                        <option key={mobo.id} value={mobo.name}>{mobo.name}</option>
+                    ))}
+                </select>
+                {selectedComponent.type === 'Motherboards' && (
+                    <div>
+                        <p>Wattage: {selectedComponent.wattage}</p>
+                        <p>Cost: {selectedComponent.cost}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default PCBuilder;
