@@ -1,13 +1,13 @@
 // src/components/allparts/ram/RAMManagement.js
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 
 const RAMManagement = () => {
     const [rams, setRams] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/v1/ram')
+        axios.get('/api/v1/ram')
             .then(response => {
                 setRams(response.data);
             })

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 import STORAGEForm from './STORAGEForm';
 
 const STORAGEManagement = () => {
@@ -11,7 +11,7 @@ const STORAGEManagement = () => {
     }, []);
 
     const fetchStorageDevices = () => {
-        axios.get('http://localhost:8080/api/v1/storage')
+        axios.get('/api/v1/storage')
             .then(response => {
                 setStorageDevices(response.data);
                 setLoading(false);

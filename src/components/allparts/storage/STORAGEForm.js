@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 
 const STORAGEForm = ({ fetchStorageDevices }) => {
     const [newStorageName, setNewStorageName] = useState('');
@@ -11,7 +11,7 @@ const STORAGEForm = ({ fetchStorageDevices }) => {
     const [newStorageType, setNewStorageType] = useState('');
 
     const addStorageDevice = () => {
-        axios.post('http://localhost:8080/api/v1/storage', {
+        axios.post('/api/v1/storage', {
             name: newStorageName,
             brand: newStorageBrand,
             capacity: newStorageCapacity,

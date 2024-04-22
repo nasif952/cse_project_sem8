@@ -1,14 +1,14 @@
 // src/components/allparts/graphicscard/GraphicsCardManagement.js
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 
 const GraphicsCardManagement = () => {
     const [graphicsCards, setGraphicsCards] = useState([]);
 
     useEffect(() => {
         // Fetch graphics cards data from the API
-        axios.get('http://localhost:8080/api/v1/graphicscard')
+        axios.get('/api/v1/graphicscard')
             .then(response => {
                 setGraphicsCards(response.data);
             })

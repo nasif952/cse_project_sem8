@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 import POWERSUPPLYForm from './POWERSUPPLYForm';
 
 const POWERSUPPLYManagement = () => {
@@ -11,7 +11,7 @@ const POWERSUPPLYManagement = () => {
     }, []);
 
     const fetchPowerSupplies = () => {
-        axios.get('http://localhost:8080/api/v1/powersupply')
+        axios.get('/api/v1/powersupply')
             .then(response => {
                 setPowerSupplies(response.data);
                 setLoading(false);

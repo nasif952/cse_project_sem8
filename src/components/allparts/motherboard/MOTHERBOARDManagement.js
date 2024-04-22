@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 import MotherboardForm from './MotherboardForm'; // Import the MotherboardForm component
 
 const MOTHERBOARDManagement = () => {
@@ -11,7 +11,7 @@ const MOTHERBOARDManagement = () => {
     }, []);
 
     const fetchMotherboards = () => {
-        axios.get('http://localhost:8080/api/v1/motherboard')
+        axios.get('/api/v1/motherboard')
             .then(response => {
                 setMotherboards(response.data);
                 setLoading(false);

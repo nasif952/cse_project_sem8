@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 
 const MONITORManagement = () => {
     const [monitors, setMonitors] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/v1/monitor')
+        axios.get('/api/v1/monitor')
             .then(response => {
                 setMonitors(response.data);
             })

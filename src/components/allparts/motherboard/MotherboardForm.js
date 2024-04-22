@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 
 const MotherboardForm = ({ fetchMotherboards }) => {
     const [newMotherboardName, setNewMotherboardName] = useState('');
@@ -10,7 +10,7 @@ const MotherboardForm = ({ fetchMotherboards }) => {
     const [newMotherboardImageLink, setNewMotherboardImageLink] = useState('');
 
     const addMotherboard = () => {
-        axios.post('http://localhost:8080/api/v1/motherboard', {
+        axios.post('/api/v1/motherboard', {
             name: newMotherboardName,
             brand: newMotherboardBrand,
             wattage: newMotherboardWattage,

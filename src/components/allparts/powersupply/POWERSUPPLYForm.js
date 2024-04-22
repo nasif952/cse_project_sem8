@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../../api/axiosConfig';
 
 const POWERSUPPLYForm = ({ fetchPowerSupplies }) => {
     const [newPowerSupplyName, setNewPowerSupplyName] = useState('');
@@ -10,7 +10,7 @@ const POWERSUPPLYForm = ({ fetchPowerSupplies }) => {
     const [newPowerSupplyImageLink, setNewPowerSupplyImageLink] = useState('');
 
     const addPowerSupply = () => {
-        axios.post('http://localhost:8080/api/v1/powersupply', {
+        axios.post('/api/v1/powersupply', {
             name: newPowerSupplyName,
             brand: newPowerSupplyBrand,
             wattage: newPowerSupplyWattage,
