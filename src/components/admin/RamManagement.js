@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import styles from './MonitorManagementStyles.module.css';
 
 const RamManagement = () => {
@@ -22,7 +22,7 @@ const RamManagement = () => {
 
     const fetchRams = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/ram');
+            const response = await axios.get('/api/v1/ram');
             setRams(response.data);
         } catch (error) {
             console.error('Error fetching RAMs:', error);
@@ -38,7 +38,7 @@ const RamManagement = () => {
     };
 
     const addOrUpdateRam = async () => {
-        const url = editingRam ? `http://localhost:8080/api/v1/ram/${editingRam.id}` : 'http://localhost:8080/api/v1/ram';
+        const url = editingRam ? `/api/v1/ram/${editingRam.id}` : '/api/v1/ram';
         const method = editingRam ? 'put' : 'post';
 
         try {
@@ -58,7 +58,7 @@ const RamManagement = () => {
 
     const removeRam = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/ram/${id}`);
+            await axios.delete(`/api/v1/ram/${id}`);
             fetchRams(); // Refresh list
         } catch (error) {
             console.error('Error removing RAM:', error);

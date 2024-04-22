@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './MonitorManagementStyles.module.css';
+import api from '../../api/axiosConfig';
 const BuildForm = ({ editingBuild, setEditingBuild, fetchBuilds }) => {
     const [build, setBuild] = useState({
         buildid: '',
@@ -74,9 +75,9 @@ const BuildForm = ({ editingBuild, setEditingBuild, fetchBuilds }) => {
         e.preventDefault();
         try {
             if (editingBuild) {
-                await axios.put(`http://localhost:8080/api/v1/builds/${editingBuild.buildid}`, build);
+                await api.put(`/api/v1/builds/${editingBuild.buildid}`, build);
             } else {
-                await axios.post('http://localhost:8080/api/v1/builds', build);
+                await api.post('/api/v1/builds', build);
             }
             fetchBuilds();
             setEditingBuild(null);

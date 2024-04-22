@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styles from './MonitorManagementStyles.module.css';
+import api from '../../api/axiosConfig';
 
 const BuildList = ({ builds, startEdit, fetchBuilds }) => {
     const handleEdit = (build) => {
@@ -9,7 +10,7 @@ const BuildList = ({ builds, startEdit, fetchBuilds }) => {
 
     const handleDelete = async (buildid) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/builds/${buildid}`);
+            await api.delete(`/api/v1/builds/${buildid}`);
             fetchBuilds();
         } catch (error) {
             console.error('Error deleting build:', error);

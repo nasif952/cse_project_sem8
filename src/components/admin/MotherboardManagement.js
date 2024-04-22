@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import styles from './MonitorManagementStyles.module.css';
 
 const MotherboardManagement = () => {
@@ -20,7 +20,7 @@ const MotherboardManagement = () => {
 
     const fetchMotherboards = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/motherboard');
+            const response = await axios.get('/api/v1/motherboard');
             setMotherboards(response.data);
         } catch (error) {
             console.error('Error fetching Motherboards:', error);
@@ -36,7 +36,7 @@ const MotherboardManagement = () => {
     };
 
     const addOrUpdateMotherboard = async () => {
-        const url = editingMotherboard ? `http://localhost:8080/api/v1/motherboard/${editingMotherboard.id}` : 'http://localhost:8080/api/v1/motherboard';
+        const url = editingMotherboard ? `/api/v1/motherboard/${editingMotherboard.id}` : '/api/v1/motherboard';
         const method = editingMotherboard ? 'put' : 'post';
 
         try {
@@ -60,7 +60,7 @@ const MotherboardManagement = () => {
 
     const removeMotherboard = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/motherboard/${id}`);
+            await axios.delete(`/api/v1/motherboard/${id}`);
             fetchMotherboards();
         } catch (error) {
             console.error('Error removing Motherboard:', error);

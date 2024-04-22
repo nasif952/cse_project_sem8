@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import BuildList from './BuildList';
 import BuildForm from './BuildForm';
 import styles from './MonitorManagementStyles.module.css';
@@ -14,7 +14,7 @@ const BuildsManagement = () => {
 
     const fetchBuilds = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/builds');
+            const response = await axios.get('/api/v1/builds');
             setBuilds(response.data);
         } catch (error) {
             console.error('Error fetching builds:', error);

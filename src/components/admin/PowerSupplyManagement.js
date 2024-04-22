@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import styles from './MonitorManagementStyles.module.css';
 const PowerSupplyManagement = () => {
     const [powerSupplies, setPowerSupplies] = useState([]);
@@ -20,7 +20,7 @@ const PowerSupplyManagement = () => {
 
     const fetchPowerSupplies = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/powersupply');
+            const response = await axios.get('/api/v1/powersupply');
             setPowerSupplies(response.data);
         } catch (error) {
             console.error('Error fetching Power Supplies:', error);
@@ -36,7 +36,7 @@ const PowerSupplyManagement = () => {
     };
 
     const addOrUpdatePowerSupply = async () => {
-        const url = editingPowerSupply ? `http://localhost:8080/api/v1/powersupply/${editingPowerSupply.id}` : 'http://localhost:8080/api/v1/powersupply';
+        const url = editingPowerSupply ? `/api/v1/powersupply/${editingPowerSupply.id}` : '/api/v1/powersupply';
         const method = editingPowerSupply ? 'put' : 'post';
 
         try {
@@ -56,7 +56,7 @@ const PowerSupplyManagement = () => {
 
     const removePowerSupply = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/powersupply/${id}`);
+            await axios.delete(`/api/v1/powersupply/${id}`);
             fetchPowerSupplies(); // Refresh list
         } catch (error) {
             console.error('Error removing Power Supply:', error);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import styles from './MonitorManagementStyles.module.css';
 const StorageManagement = () => {
     const [storages, setStorages] = useState([]);
@@ -21,7 +21,7 @@ const StorageManagement = () => {
 
     const fetchStorages = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/storage');
+            const response = await axios.get('/api/v1/storage');
             setStorages(response.data);
         } catch (error) {
             console.error('Error fetching Storages:', error);
@@ -37,7 +37,7 @@ const StorageManagement = () => {
     };
 
     const addOrUpdateStorage = async () => {
-        const url = editingStorage ? `http://localhost:8080/api/v1/storage/${editingStorage.id}` : 'http://localhost:8080/api/v1/storage';
+        const url = editingStorage ? `/api/v1/storage/${editingStorage.id}` : '/api/v1/storage';
         const method = editingStorage ? 'put' : 'post';
 
         try {
@@ -57,7 +57,7 @@ const StorageManagement = () => {
 
     const removeStorage = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/storage/${id}`);
+            await axios.delete(`/api/v1/storage/${id}`);
             fetchStorages(); // Refresh list
         } catch (error) {
             console.error('Error removing Storage:', error);

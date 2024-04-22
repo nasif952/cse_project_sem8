@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import './PCBuilder.css';
 import { jsPDF } from 'jspdf';
 
@@ -44,7 +44,7 @@ const PCBuilder = () => {
                     '/api/v1/storage'
                 ];
 
-                const promises = endpoints.map(endpoint => axios.get(`http://localhost:8080${endpoint}`));
+                const promises = endpoints.map(endpoint => axios.get(`${endpoint}`));
                 const responses = await Promise.all(promises);
 
                 const data = responses.map(response => response.data);

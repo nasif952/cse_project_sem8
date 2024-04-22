@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import styles from './MonitorManagementStyles.module.css';
 
 const MonitorManagement = () => {
@@ -22,7 +22,7 @@ const MonitorManagement = () => {
 
     const fetchMonitors = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/monitor');
+            const response = await axios.get('/api/v1/monitor');
             setMonitors(response.data);
         } catch (error) {
             console.error('Error fetching Monitors:', error);
@@ -38,7 +38,7 @@ const MonitorManagement = () => {
     };
 
     const addOrUpdateMonitor = async () => {
-        const url = editingMonitor ? `http://localhost:8080/api/v1/monitor/${editingMonitor.id}` : 'http://localhost:8080/api/v1/monitor';
+        const url = editingMonitor ? `/api/v1/monitor/${editingMonitor.id}` : '/api/v1/monitor';
         const method = editingMonitor ? 'put' : 'post';
 
         try {
@@ -58,7 +58,7 @@ const MonitorManagement = () => {
 
     const removeMonitor = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/monitor/${id}`);
+            await axios.delete(`/api/v1/monitor/${id}`);
             fetchMonitors(); // Refresh list
         } catch (error) {
             console.error('Error removing Monitor:', error);

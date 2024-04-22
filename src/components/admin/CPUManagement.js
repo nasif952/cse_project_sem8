@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import styles from './MonitorManagementStyles.module.css';
 
 const CPUManagement = () => {
@@ -21,7 +21,7 @@ const CPUManagement = () => {
 
     const fetchCPUs = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/cpu');
+            const response = await axios.get('/api/v1/cpu');
             setCPUs(response.data);
         } catch (error) {
             console.error('Error fetching CPUs:', error);
@@ -40,7 +40,7 @@ const CPUManagement = () => {
 
 
     const addOrUpdateCPU = async () => {
-        const url = editingCPU ? `http://localhost:8080/api/v1/cpu/${editingCPU.id}` : 'http://localhost:8080/api/v1/cpu';
+        const url = editingCPU ? `/api/v1/cpu/${editingCPU.id}` : '/api/v1/cpu';
         const method = editingCPU ? 'put' : 'post';
 
         try {
@@ -64,7 +64,7 @@ const CPUManagement = () => {
 
     const removeCPU = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/cpu/${id}`);
+            await axios.delete(`/api/v1/cpu/${id}`);
             fetchCPUs(); // Refresh list
         } catch (error) {
             console.error('Error removing CPU:', error);

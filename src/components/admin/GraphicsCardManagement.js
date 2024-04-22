@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api/axiosConfig';
 import styles from './MonitorManagementStyles.module.css';
 
 const GraphicsCardManagement = () => {
@@ -22,7 +22,7 @@ const GraphicsCardManagement = () => {
 
     const fetchGraphicsCards = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/graphicscard');
+            const response = await axios.get('/api/v1/graphicscard');
             setGraphicsCards(response.data);
         } catch (error) {
             console.error('Error fetching Graphics Cards:', error);
@@ -38,7 +38,7 @@ const GraphicsCardManagement = () => {
     };
 
     const addOrUpdateGraphicsCard = async () => {
-        const url = editingGraphicsCard ? `http://localhost:8080/api/v1/graphicscard/${editingGraphicsCard.id}` : 'http://localhost:8080/api/v1/graphicscard';
+        const url = editingGraphicsCard ? `/api/v1/graphicscard/${editingGraphicsCard.id}` : '/api/v1/graphicscard';
         const method = editingGraphicsCard ? 'put' : 'post';
 
         try {
@@ -63,7 +63,7 @@ const GraphicsCardManagement = () => {
 
     const removeGraphicsCard = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/v1/graphicscard/${id}`);
+            await axios.delete(`/api/v1/graphicscard/${id}`);
             fetchGraphicsCards(); // Refresh list
         } catch (error) {
             console.error('Error removing Graphics Card:', error);
